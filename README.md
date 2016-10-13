@@ -35,3 +35,22 @@ Example: 'Resources.cs, *.Design.cs'
 ### ignorePath
 A list of pathes to ignore. Masks are applied to path relative to basePath.
 Example: "*\bin\*, Demo\*"
+
+## Examples
+* Fix encoding in all *.cs (default) files:
+```
+powershell ./process.ps1 "D:\Work\R-n-D\MyProject\Sources\MyLib\Repo\Src" -fixEncoding
+```
+
+* Fix encoding in all *.java files:
+```
+powershell ./process.ps1 "D:\Work\R-n-D\MyProject\Sources\MyLib\Repo\Src" -fixEncoding -Include *.java
+```
+
+* Fix encoding and add header from header.txt, check out files via tf.exe (TFS), 
+```
+powershell ./process.ps1 "D:\Work\R-n-D\MyProject\Sources\MyLib\Repo\Src" -fixEncoding -addHeader "header.txt" \
+	-ignorePath *\Backup\*,*\NotUsed\*
+	-ignoreFiles AssemblyInfo.cs
+	-tfs """Z:\Prog\Microsoft Visual Studio 12.0\Common7\IDE\TF.exe"""
+```
