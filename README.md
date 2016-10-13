@@ -4,7 +4,14 @@ PowerShell script for executing different tasks with source files (fix encoding,
 
 USAGE:
 ``` 
-powershell.exe ./process.ps1 [-basePath <path>] [-include <filesmask-list>] [-convertEncoding <encoding>] [-addHeader <path>] [-removeHeader] [-removeComments] [-ignoreFiles <filemask-list>] [-ignorePaht <path-list>]
+powershell.exe ./process.ps1 [-basePath <path>] 
+	[-include <filesmask-list>] 
+	[-convertEncoding <encoding>] 
+	[-addHeader <path>] 
+	[-removeHeader] 
+	[-removeComments] 
+	[-ignoreFiles <filemask-list>] 
+	[-ignorePaht <path-list>]
 ```
 
 ## Options
@@ -12,9 +19,11 @@ powershell.exe ./process.ps1 [-basePath <path>] [-include <filesmask-list>] [-co
 ### basePath
 Base path where to search files. 
 If not specified script folder will be used.
+Can be specified positionaly (the 1st).
 
 ### include 
-Mask of files to process, e.g. '*.cs'.
+Mask of files to process.
+Example: "*.cs" or "*.cs,*.java,*.js"
 
 ### fixEncoding 
 Switch to enable fixing encoding of all files to utf-8 (if it defers).
@@ -54,3 +63,7 @@ powershell ./process.ps1 "D:\Work\R-n-D\MyProject\Sources\MyLib\Repo\Src" -fixEn
 	-ignoreFiles AssemblyInfo.cs
 	-tfs """Z:\Prog\Microsoft Visual Studio 12.0\Common7\IDE\TF.exe"""
 ```
+
+# Licences & Copyrights
+Detecting encoding is based on C# port by @errepi of Mozille Universal Charset Detector - see https://github.com/errepi/ude
+
