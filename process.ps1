@@ -4,6 +4,7 @@ Param(
 	[String]$basePath,
 	[String[]]$Include=@("*.cs"),
 	[switch]$fixEncoding,
+	[switch]$useBom,
 	[String]$tfs,
 	[String]$addHeader,
 	[switch]$removeHeader,
@@ -145,9 +146,18 @@ Get-ChildItem -Path $basePath -r -Include $Include | ForEach-Object {
 			&$tfs checkout $filePath | Out-Null
 		}
 
-		# Write it down back as UTF-8 w/o BOM
-		# NOTE: both Set-Content and Out-File write out BOM for UTF8, so we're using .NET method:
-		[System.IO.File]::WriteAllText($filePath, $text)
+		# Write it down back as UTF-8
+		if($useBom)
+		{
+			#with BOM
+			Out-File -FilePath $filePath -Encoding UTF8 -InputObject $text
+		}
+		else
+		{
+			#w/o BOM
+			# NOTE: both Set-Content and Out-File write out BOM for UTF8, so we're using .NET method:
+			[System.IO.File]::WriteAllText($filePath, $text)
+		}
 		Write-Host "Updated $relativePath\$fileName"
 	}
 }
