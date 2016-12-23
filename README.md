@@ -8,6 +8,8 @@ powershell.exe ./process.ps1 [-basePath <path>]
 	[-include <filesmask-list>] 
 	[-convertEncoding <encoding>] 
 	[-addHeader <path>] 
+	[-fixEncoding]
+	[-useBom]
 	[-removeHeader] 
 	[-removeComments] 
 	[-ignoreFiles <filemask-list>] 
@@ -26,7 +28,10 @@ Mask of files to process.
 Example: "*.cs" or "*.cs,*.java,*.js"
 
 ### fixEncoding 
-Switch to enable fixing encoding of all files to utf-8 (if it defers).
+Switch to enable fixing encoding of all files to utf-8 w/o BOM by defaulut (if it defers).
+
+### useBom
+Switch to enable fixing encoding of all files to utf-8 with BOM.
 
 ### addHeader 
 A path to a text file (in utf-8) with a header to add to all files.
@@ -53,7 +58,7 @@ powershell ./process.ps1 "D:\Work\R-n-D\MyProject\Sources\MyLib\Repo\Src" -fixEn
 
 * Fix encoding in all *.java files:
 ```
-powershell ./process.ps1 "D:\Work\R-n-D\MyProject\Sources\MyLib\Repo\Src" -fixEncoding -Include *.java
+powershell ./process.ps1 "D:\Work\R-n-D\MyProject\Sources\MyLib\Repo\Src" -fixEncoding -useBom -Include *.java
 ```
 
 * Fix encoding and add header from header.txt, check out files via tf.exe (TFS), 
